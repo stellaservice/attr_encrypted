@@ -97,30 +97,28 @@ class CompatibilityTest < Minitest::Test
   private
 
   def create_tables
-    silence_stream(STDOUT) do
-      ActiveRecord::Schema.define(:version => 1) do
-        create_table :nonmarshalling_pets do |t|
-          t.string :name
-          t.string :encrypted_nickname
-          t.string :encrypted_nickname_iv
-          t.string :encrypted_nickname_salt
-          t.string :encrypted_birthdate
-          t.string :encrypted_birthdate_iv
-          t.string :encrypted_birthdate_salt
-        end
-        create_table :marshalling_pets do |t|
-          t.string :name
-          t.string :encrypted_nickname
-          t.string :encrypted_nickname_iv
-          t.string :encrypted_nickname_salt
-          t.string :encrypted_birthdate
-          t.string :encrypted_birthdate_iv
-          t.string :encrypted_birthdate_salt
-        end
+
+    ActiveRecord::Schema.define(:version => 1) do
+      create_table :nonmarshalling_pets do |t|
+        t.string :name
+        t.string :encrypted_nickname
+        t.string :encrypted_nickname_iv
+        t.string :encrypted_nickname_salt
+        t.string :encrypted_birthdate
+        t.string :encrypted_birthdate_iv
+        t.string :encrypted_birthdate_salt
+      end
+      create_table :marshalling_pets do |t|
+        t.string :name
+        t.string :encrypted_nickname
+        t.string :encrypted_nickname_iv
+        t.string :encrypted_nickname_salt
+        t.string :encrypted_birthdate
+        t.string :encrypted_birthdate_iv
+        t.string :encrypted_birthdate_salt
       end
     end
   end
 end
 
 ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => ':memory:'
-
